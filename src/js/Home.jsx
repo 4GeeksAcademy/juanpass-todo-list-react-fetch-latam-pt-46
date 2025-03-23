@@ -5,7 +5,7 @@ import TodoList from "./components/TodoList";
 import TodoFooter from "./components/TodoFooter";
 
 
-const App = () => {
+const Home = () => {
 	const [todos, setTodos] = useState([]);
 
 	const addTodo = (text) => {
@@ -30,4 +30,4 @@ const App = () => {
 };
 
 
-export default App;
+export default Home;
