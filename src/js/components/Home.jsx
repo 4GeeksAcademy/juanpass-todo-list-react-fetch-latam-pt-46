@@ -1,26 +1,29 @@
 import React from "react";
+import './index.css'
 
-//include images into your bundle
-import rigoImage from "../../img/rigo-baby.jpg";
 
-//create your first component
+import Header from "./TodoHeader";
+import Input from "./TodoInput";
+import List from "./TodoList";
+import Footer from "./TodoFooter";
+
+
 const Home = () => {
-	return (
-		<div className="text-center">
-            
+	const [todos, setTodos] = useState([]);
 
-			<h1 className="text-center mt-5">Hello Rigo!</h1>
-			<p>
-				<img src={rigoImage} />
-			</p>
-			<a href="#" className="btn btn-success">
-				If you see this green button... bootstrap is working...
-			</a>
-			<p>
-				Made by{" "}
-				<a href="http://www.4geeksacademy.com">4Geeks Academy</a>, with
-				love!
-			</p>
+	const addTodo = (text) => {
+		if (text.trim() === "") return;
+		setTodos([...todos, { text, completed: false }]);
+	};
+
+	return (
+		<div className="app-container">
+			<Header />
+			<div className="todo-box">
+				<Input onAdd={addTodo} />
+				<List todos={todos} />
+				<Footer count={todos.length} />
+			</div>
 		</div>
 	);
 };
