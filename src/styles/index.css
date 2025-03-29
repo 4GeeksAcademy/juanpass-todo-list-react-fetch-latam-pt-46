@@ -75,16 +75,6 @@ body {
 	align-items: center;
 }
 
-.delete-btn {
-	background: none;
-	border: none;
-	color: #cc9a9a;
-	font-size: 24px;
-	cursor: pointer;
-	opacity: 0.4;
-	transition: opacity 0.2s ease;
-}
-
 .delete-btn:hover {
 	opacity: 1;
 	color: red;
@@ -104,4 +94,19 @@ body {
     text-align: center;
     padding: 20px;
     border-bottom: 1px solid #ededed;
+}
+
+.delete-btn {
+    background: none;
+    border: none;
+    color: #cc9a9a;
+    font-size: 24px;
+    cursor: pointer;
+    opacity: 0; /* Oculto por defecto */
+    transition: opacity 0.5s ease; /* Transición suave */
+}
+
+.todo-item:hover .delete-btn {
+    opacity: 1; 
+    color: red; 
 }
