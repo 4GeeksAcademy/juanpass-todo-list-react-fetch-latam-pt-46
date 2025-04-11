@@ -7,11 +7,11 @@ const TodoList = ({ todos, onDelete }) => {
             {todos.length === 0 ? (
                 <li className="empty-message">No hay tareas, añadir tareas</li>
             ) : (
-                todos.map((todo, index) => (
+                todos.map((todo) => (
                     <TodoItem
-                        key={index}
-                        text={todo.text}
-                        onDelete={() => onDelete(index)}
+                        key={todo.id} // Usar 'id' como clave única
+                        text={todo.label} // Cambiar de 'todo.text' a 'todo.label'
+                        onDelete={() => onDelete(todo.id)} // Pasar 'todo.id' para eliminar correctamente
                     />
                 ))
             )}
