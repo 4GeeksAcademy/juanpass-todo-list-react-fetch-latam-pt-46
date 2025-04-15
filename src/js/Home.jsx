@@ -12,16 +12,21 @@ const USER_NAME = "juanpass";
 const Home = () => {
     const [todos, setTodos] = useState([]);
 
-    // Cargar tareas del usuario al iniciar
     useEffect(() => {
         const loadTodos = async () => {
             try {
-                // Crear usuario si no existe
-                await fetch(`${BASE_URL_USERS}/${USER_NAME}`, {
-                    method: "POST",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({ name: USER_NAME, id: 0 }),
-                });
+                // Verificar si el usuario existe
+                const userResponse = await fetch(`${BASE_URL_USERS}/${USER_NAME}`);
+                if (userResponse.status === 404) {
+                    // Crear usuario si no existe
+                    await fetch(`${BASE_URL_USERS}/${USER_NAME}`, {
+                        method: "POST",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify({ name: USER_NAME, id: 0 }),
+                    });
+                } else if (!userResponse.ok) {
+                    throw new Error("Error al verificar el usuario");
+                }
     
                 // Obtener tareas del usuario
                 const response = await fetch(`${BASE_URL_USERS}/${USER_NAME}`);
