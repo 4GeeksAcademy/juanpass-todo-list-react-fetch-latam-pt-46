@@ -70,16 +70,31 @@ const handleDeleteTodo = async (todoId) => {
     }
 };
 
+const handleDeleteTodos = async () => {
+    todos.forEach(async (todo) => {
+        try {
+            const response = await fetch(`${BASE_URL_TODOS}/${todo.id}`, {
+                method: "DELETE",
+            });
+            if (!response.ok) throw new Error("Error al eliminar la tarea");
+        } catch (error) {
+            console.error("Error al eliminar tarea:", error);
+        }
+    });
+    setTodos([]);
+   
+}
     return (
         <div className="app-container">
             <TodoHeader />
             <div className="todo-box">
                 <TodoInput onAdd={addTodo} isEmpty={todos.length === 0} />
                 <TodoList todos={todos} onDelete={handleDeleteTodo} />
-                <TodoFooter count={todos.length} />
+                <TodoFooter count={todos.length} onDeleteAll={handleDeleteTodos} />
             </div>
         </div>
     );
 };
+
 
 export default Home;
